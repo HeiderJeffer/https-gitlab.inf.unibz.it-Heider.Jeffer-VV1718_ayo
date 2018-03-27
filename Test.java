@@ -4,22 +4,20 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 
 public class Test {
-
+	ArrayList<String[]> account;
+	
 	@Before
 	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	@org.junit.Test
-	public void test1() {
+		System.out.println("=== Set Up ===");
+		System.out.println("Initialization of account array");
+		account = new ArrayList<String[]>();
+		
 		String csvFile = "data/Account.csv";
 		BufferedReader br = null;
 		String line = "";
@@ -30,15 +28,8 @@ public class Test {
 			int counter = 0;
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
-				if(counter++ == 0) continue;
-
-				// use comma as separator
-				String[] column = line.split(cvsSplitBy);
-
-				if(column[0].startsWith("NDS_AF"))
-					assertEquals(column[3],"false");
-				else if(column[0].startsWith("NDS_BS_PP"))
-					assertEquals(column[3],"true");
+				if (counter++ == 0) continue;
+				else account.add(line.split(cvsSplitBy));
 			}
 
 		} catch (FileNotFoundException e) {
@@ -54,6 +45,16 @@ public class Test {
 				}
 			}
 		}
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		System.out.println("=== Tear Down ===");
+	}
+
+	@org.junit.Test
+	public void test() {
+		System.out.println("Array account length: " + account.size());
 	}
 
 }
