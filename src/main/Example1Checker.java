@@ -1,3 +1,4 @@
+package main;
 import adapters.IAccount;
 import adapters.ICRComponent;
 import adapters.ICompany;

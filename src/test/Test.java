@@ -1,3 +1,4 @@
+package test;
 import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
@@ -9,14 +10,16 @@ import java.util.ArrayList;
 import org.junit.After;
 import org.junit.Before;
 
+import main.Example1Checker;
+import app.Account;
+
 public class Test {
-	ArrayList<String[]> account;
+	ArrayList<String[]> accountCSV;
 	
 	@Before
 	public void setUp() throws Exception {
-		System.out.println("=== Set Up ===");
-		System.out.println("Initialization of account array");
-		account = new ArrayList<String[]>();
+		System.out.println("Load Account.csv file");
+		accountCSV = new ArrayList<String[]>();
 		
 		String csvFile = "data/Account.csv";
 		BufferedReader br = null;
@@ -29,7 +32,7 @@ public class Test {
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
 				if (counter++ == 0) continue;
-				else account.add(line.split(cvsSplitBy));
+				else accountCSV.add(line.split(cvsSplitBy));
 			}
 
 		} catch (FileNotFoundException e) {
@@ -49,12 +52,24 @@ public class Test {
 
 	@After
 	public void tearDown() throws Exception {
-		System.out.println("=== Tear Down ===");
+		System.out.println("Finish testing");
 	}
 
 	@org.junit.Test
-	public void test() {
-		System.out.println("Array account length: " + account.size());
+	public void testAccount() {
+		Example1Checker checker = new Example1Checker();
+		
+		for (int i=0;i<accountCSV.size();i++) {
+			String[] row = accountCSV.get(i);
+			Boolean isPartnerAllowed = Boolean.valueOf(row[3]);
+			Account account = new Account(row[0],row[1],row[2],isPartnerAllowed);
+			
+			// Check prefix NDS_AF
+			if (row[0].startsWith("NDS_AF")) {
+				
+				assertEquals(isPartnerAllowed,checker.isValid(account));
+			}
+		}
 	}
 
 }
