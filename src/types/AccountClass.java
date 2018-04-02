@@ -1,10 +1,18 @@
 package types;
 
-public enum AccountClass {
+public class AccountClass {
 
-	SalesReporting,
-	PLStatement,
-	AllocationFormula,
-	BalanceSheet,
-	Logistics
+	String[] accountClasses = {
+			"SalesReporting",
+			"PLStatement",
+			"AllocationFormula",
+			"BalanceSheet",
+			"Logistics"
+	};
+	
+	public String accountClass;
+
+	public AccountClass (String accountClass) {
+		this.accountClass = accountClass;
+	}
 }

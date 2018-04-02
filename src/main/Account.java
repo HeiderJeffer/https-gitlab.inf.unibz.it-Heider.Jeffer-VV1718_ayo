@@ -1,4 +1,4 @@
-package app;
+package main;
 import adapters.IAccount;
 import types.AccountClass;
 import types.AccountType;
@@ -9,10 +9,10 @@ public class Account implements IAccount {
 	AccountType accountType;
 	boolean isPartnerAllowed;
 	
-	public Account (String code, String accountClass, String accountType, boolean isPartnerAllowed) {
+	public Account(String code, String accountClass, String accountType, boolean isPartnerAllowed) {
 		this.code = code;
-		//this.accountClass = accountClass;
-		//this.accountType = accountType;
+		this.accountClass = new AccountClass (accountClass);
+		this.accountType = new AccountType (accountType);
 		this.isPartnerAllowed = isPartnerAllowed;
 	}
 

@@ -1,24 +1,32 @@
 package types;
 
-public enum AccountType {
+public class AccountType {
 
-	BranchOffice,
-	SpecialAnalyses,
-	SpecialAnalysesNumOfInvoicingDays,
-	SpecialAnalysesServiceDegree,
-	VK,
-	SEAN,
-	Employees,
-	SML,
-	SMLGrossProfit,
-	SMLPotential,
-	Customer,
+	String[] accountTypes = {
+			"BranchOffice",
+			"SpecialAnalyses",
+			"SpecialAnalysesNumOfInvoicingDays",
+			"SpecialAnalysesServiceDegree",
+			"VK",
+			"SEAN",
+			"Employees",
+			"SML",
+			"SMLGrossProfit",
+			"SMLPotential",
+			"Customer",
+
+			"PrognosisSales",
+			"PrognosisOperatingResult",
+			"PrognosisNumOfAdmMPlus1",
+			"PrognosisNumOfAdmMPlus2",
+			"PrognosisNumOfAdmDecember",
+
+			"AssetPartner"
+	};
 	
-	PrognosisSales,
-	PrognosisOperatingResult,
-	PrognosisNumOfAdmMPlus1,
-	PrognosisNumOfAdmMPlus2,
-	PrognosisNumOfAdmDecember,
+	public String accountType;
 	
-	AssetPartner,
+	public AccountType (String accountType) {
+		this.accountType = accountType;
+	}
 }

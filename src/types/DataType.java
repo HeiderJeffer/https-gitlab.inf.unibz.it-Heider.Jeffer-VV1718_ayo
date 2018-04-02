@@ -1,11 +1,19 @@
 package types;
 
-public enum DataType {
+public class DataType {
 
-	SalesReporting,
-	PLStatement,
-	AllocationFormula,
-	BalanceSheet,
-	Logistics,
-	Acquisition,
+	String[] dataTypes = {
+			"SalesReporting",
+			"PLStatement",
+			"AllocationFormula",
+			"BalanceSheet",
+			"Logistics",
+			"Acquisition"
+	};
+	
+	String dataType;
+	
+	public DataType (String dataType) {
+		this.dataType = dataType;
+	}
 }

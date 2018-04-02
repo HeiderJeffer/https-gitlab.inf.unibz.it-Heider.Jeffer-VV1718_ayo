@@ -12,7 +12,7 @@ public interface IData {
 	public DataScenarioType getScenario();
 	
 	public IAccount getAccount();
-	public String getParternCode();
+	public String getPartnerCode();
 	public String getCurrencyCode();
 	
 	public int getYear();

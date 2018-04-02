@@ -1,10 +1,18 @@
 package types;
 
-public enum DataScenarioType {
+public class DataScenarioType {
 
-	Actual,
-	Deferral,
-	Extrapolation,
-	Target,
-	Plan,
+	String[] dataScenarioTypes = {
+			"Actual",
+			"Deferral",
+			"Extrapolation",
+			"Target",
+			"Plan",
+	};
+	
+	public String dataScenarioType;
+	
+	public DataScenarioType (String dataScenarioType) {
+		this.dataScenarioType = dataScenarioType;
+	}
 }

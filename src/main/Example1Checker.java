@@ -52,15 +52,15 @@ public class Example1Checker {
 		
 		boolean hasCurrencyCode = !isEmpty(currencyCode);
 		
-		switch(account.getAccountClass()) {
+		switch(account.getAccountClass().accountClass) {
 		
-		case SalesReporting:
+		case "SalesReporting":
 
 			// Profit Center
-			switch(account.getAccountType()) {
-			case BranchOffice:
-			case SpecialAnalyses:
-			case VK:
+			switch(account.getAccountType().accountType) {
+			case "BranchOffice":
+			case "SpecialAnalyses":
+			case "VK":
 				if(!profitCenter.isNotAllocated()) {
 					return false;
 				}
@@ -68,26 +68,26 @@ public class Example1Checker {
 			}
 			
 			// C/R Component
-			switch(account.getAccountType()) {
-			case VK:
+			switch(account.getAccountType().accountType) {
+			case "VK":
 				if(!crComponent.isVKAllowed() || !crComponent.isNotAllocated()) {
 					return false;
 				}
 				break;
-			case SEAN:
+			case "SEAN":
 				if(!crComponent.isSEANAllowed() || !crComponent.isNotAllocated()) {
 					return false;
 				}
 				break;
-			case BranchOffice:
-			case SpecialAnalyses:
-			case Employees:
+			case "BranchOffice":
+			case "SpecialAnalyses":
+			case "Employees":
 				if(!crComponent.isNotAllocated()) {
 					return false;
 				}
 				break;
-			case SML:
-			case Customer:
+			case "SML":
+			case "Customer":
 				if(crComponent.isNotAllocated()) {
 					return false;
 				}
@@ -95,10 +95,10 @@ public class Example1Checker {
 			}
 			
 			// Internal/External
-			switch(account.getAccountType()) {
-			case BranchOffice:
-			case SpecialAnalyses:
-			case VK:
+			switch(account.getAccountType().accountType) {
+			case "BranchOffice":
+			case "SpecialAnalyses":
+			case "VK":
 				if(!external) {
 					return false;
 				}
@@ -106,22 +106,22 @@ public class Example1Checker {
 			}
 			
 			// Scenario
-			switch(scenarioType) {
-			case Deferral:
-				switch(account.getAccountType()) {
-				case BranchOffice:
+			switch(scenarioType.dataScenarioType) {
+			case "Deferral":
+				switch(account.getAccountType().accountType) {
+				case "BranchOffice":
 					break;
 				default:
 					return false;
 				}
-			case Extrapolation:
-			case Target:
-			case Plan:
-				switch(account.getAccountType()) {
-				case SEAN:
-				case SpecialAnalyses:
-				case SMLGrossProfit:
-				case SMLPotential:
+			case "Extrapolation":
+			case "Target":
+			case "Plan":
+				switch(account.getAccountType().accountType) {
+				case "SEAN":
+				case "SpecialAnalyses":
+				case "SMLGrossProfit":
+				case "SMLPotential":
 					return false;
 				}
 				break;
@@ -138,14 +138,14 @@ public class Example1Checker {
 			}
 			break;
 			
-		case PLStatement:
+		case "PLStatement":
 
-			switch(account.getAccountType()) {
-			case PrognosisSales:
-			case PrognosisOperatingResult:
-			case PrognosisNumOfAdmMPlus1:
-			case PrognosisNumOfAdmMPlus2:
-			case PrognosisNumOfAdmDecember:
+			switch(account.getAccountType().accountType) {
+			case "PrognosisSales":
+			case "PrognosisOperatingResult":
+			case "PrognosisNumOfAdmMPlus1":
+			case "PrognosisNumOfAdmMPlus2":
+			case "PrognosisNumOfAdmDecember":
 
 				// Profit Center
 				if(!profitCenter.isNotAllocated()) {
@@ -158,11 +158,11 @@ public class Example1Checker {
 				}
 
 				// Internal/External
-				switch(account.getAccountType()) {
-				case PrognosisOperatingResult:
-				case PrognosisNumOfAdmMPlus1:
-				case PrognosisNumOfAdmMPlus2:
-				case PrognosisNumOfAdmDecember:
+				switch(account.getAccountType().accountType) {
+				case "PrognosisOperatingResult":
+				case "PrognosisNumOfAdmMPlus1":
+				case "PrognosisNumOfAdmMPlus2":
+				case "PrognosisNumOfAdmDecember":
 					if(!external) {
 						return false;
 					}
@@ -170,8 +170,8 @@ public class Example1Checker {
 				}
 
 				// Scenario
-				switch(scenarioType) {
-				case Actual:
+				switch(scenarioType.dataScenarioType) {
+				case "Actual":
 					break;
 				default:
 					return false;
@@ -208,8 +208,8 @@ public class Example1Checker {
 					}
 					
 					// Scenario
-					switch(scenarioType) {
-					case Actual:
+					switch(scenarioType.dataScenarioType) {
+					case "Actual":
 						break;
 					default:
 						return false;
@@ -237,12 +237,12 @@ public class Example1Checker {
 			}
 			break;
 			
-		case AllocationFormula:
+		case "AllocationFormula":
 
 			// Scenario
-			switch(scenarioType) {
-			case Deferral:
-			case Extrapolation:
+			switch(scenarioType.dataScenarioType) {
+			case "Deferral":
+			case "Extrapolation":
 				return false;
 			}
 			
@@ -257,12 +257,12 @@ public class Example1Checker {
 			}
 			break;
 			
-		case BalanceSheet:
+		case "BalanceSheet":
 
 			// Profit Center
 			if(hasPartnerCode) {
-				switch(account.getAccountType()) {
-				case AssetPartner:
+				switch(account.getAccountType().accountType) {
+				case "AssetPartner":
 					break;
 				default:
 					if(!profitCenter.isNotAllocated()) {
@@ -283,11 +283,11 @@ public class Example1Checker {
 			}
 
 			// Scenario
-			switch(scenarioType) {
-			case Deferral:
+			switch(scenarioType.dataScenarioType) {
+			case "Deferral":
 				if(hasPartnerCode) {
-					switch(account.getAccountType()) {
-					case AssetPartner:
+					switch(account.getAccountType().accountType) {
+					case "AssetPartner":
 						break;
 					default:
 						return false;
@@ -298,8 +298,8 @@ public class Example1Checker {
 			
 			// Currency
 			if(hasPartnerCode) {
-				switch(account.getAccountType()) {
-				case AssetPartner:
+				switch(account.getAccountType().accountType) {
+				case "AssetPartner":
 					break;
 				default:
 					if(!hasCurrencyCode) {
@@ -315,7 +315,7 @@ public class Example1Checker {
 			}
 			break;
 			
-		case Logistics:
+		case "Logistics":
 			
 			// Profit Center
 			if(!profitCenter.isNotAllocated()) {
@@ -333,8 +333,8 @@ public class Example1Checker {
 			}
 			
 			// Scenario
-			switch(scenarioType) {
-			case Actual:
+			switch(scenarioType.dataScenarioType) {
+			case "Actual":
 				break;
 			default:
 				return false;
