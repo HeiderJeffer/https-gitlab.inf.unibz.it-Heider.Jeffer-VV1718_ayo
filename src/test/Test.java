@@ -20,6 +20,7 @@ import types.DataScenarioType;
 
 public class Test {	
 	ArrayList<String[]> accountCSV;
+	ArrayList<String[]> accountCombinationsCSV;
 
 	Example1Checker checker = new Example1Checker();
 
@@ -32,10 +33,13 @@ public class Test {
 
 	@Before
 	public void setUp() throws Exception {
-		System.out.println("Load Account.csv file");
-		
+		System.out.println("Load Account.csv and AccountCombinations.csv");
+
 		String accountCSVLoc = "data/Account.csv";
 		accountCSV = CSVReader.reader(accountCSVLoc, ",", 1);
+
+		String accountCombinationsCSVLoc = "data/AccountCombinations.csv";
+		accountCombinationsCSV = CSVReader.reader(accountCombinationsCSVLoc, ",", 1);
 	}
 
 	@After
@@ -44,19 +48,25 @@ public class Test {
 	}
 
 	@org.junit.Test
-	public void test1() {
-		for (int i=0;i<accountCSV.size();i++) {		
-			String[] row = accountCSV.get(i);
+	public void test() {
+		for(int i=0;i<accountCombinationsCSV.size();i++) {
+			String[] row = accountCombinationsCSV.get(i);
 
-			Boolean isPartnerAllowed = Boolean.valueOf(row[3]);
-			Account account = new Account(row[0],row[1],row[2],isPartnerAllowed);
+			if(row[0].contains("-")) continue;
+			else {
+				for(int j=0;j<accountCSV.size();j++) {
+					String[] row2 = accountCSV.get(j);
 
-			// Check prefix NDS_AF
-			if (row[0].startsWith("NDS_AF")) {
-				System.out.println(i + ". " + row[0] + " " + row[1] + " " + row[2] + " " + row[3]);
-				assertEquals(isPartnerAllowed,checker.isValid(company, profitCenter, crComponent, isPartnerAllowed, scenarioType, account, currencyCode, currencyCode));
-				System.out.println("Testing complete for line " + i);
-				System.out.println();
+					if(row2[0].startsWith(row[0])) {
+						Boolean isPartnerAllowed = Boolean.valueOf(row2[3]);
+						Account account = new Account(row2[0],row2[1],row2[2],isPartnerAllowed);
+
+						System.out.println((j+1) + ". " + row2[0] + " " + row2[1] + " " + row2[2] + " " + row2[3]);
+						assertEquals(isPartnerAllowed,checker.isValid(company, profitCenter, crComponent, isPartnerAllowed, scenarioType, account, currencyCode, currencyCode));
+						System.out.println("Testing complete for line " + (j+1));
+						System.out.println();
+					}
+				}
 			}
 		}
 	}
