@@ -12,12 +12,13 @@ import org.junit.Before;
 
 import main.Account;
 import main.CRComponent;
+import main.CSVReader;
 import main.Company;
 import main.Example1Checker;
 import main.ProfitCenter;
 import types.DataScenarioType;
 
-public class Test {
+public class Test {	
 	ArrayList<String[]> accountCSV;
 
 	Example1Checker checker = new Example1Checker();
@@ -32,33 +33,9 @@ public class Test {
 	@Before
 	public void setUp() throws Exception {
 		System.out.println("Load Account.csv file");
-		accountCSV = new ArrayList<String[]>();
-
-		String csvFile = "data/Account.csv";
-		BufferedReader br = null;
-		String line = "";
-		String cvsSplitBy = ",";
-
-		try {
-			int counter = 0;
-			br = new BufferedReader(new FileReader(csvFile));
-			while ((line = br.readLine()) != null) {
-				if (counter++ == 0) continue;
-				else accountCSV.add(line.split(cvsSplitBy));
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		
+		String accountCSVLoc = "data/Account.csv";
+		accountCSV = CSVReader.reader(accountCSVLoc, ",", 1);
 	}
 
 	@After
