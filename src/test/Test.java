@@ -20,6 +20,15 @@ import types.DataScenarioType;
 public class Test {
 	ArrayList<String[]> accountCSV;
 
+	Example1Checker checker = new Example1Checker();
+
+	Company company = new Company(); // dummy object
+	ProfitCenter profitCenter = new ProfitCenter(); // dummy object
+	CRComponent crComponent = new CRComponent(); // dummy object
+	boolean external = true; // dummy value
+	DataScenarioType scenarioType = new DataScenarioType(""); // dummy value
+	String currencyCode = "$"; // dummy value
+
 	@Before
 	public void setUp() throws Exception {
 		System.out.println("Load Account.csv file");
@@ -31,14 +40,12 @@ public class Test {
 		String cvsSplitBy = ",";
 
 		try {
-
 			int counter = 0;
 			br = new BufferedReader(new FileReader(csvFile));
 			while ((line = br.readLine()) != null) {
 				if (counter++ == 0) continue;
 				else accountCSV.add(line.split(cvsSplitBy));
 			}
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -60,19 +67,9 @@ public class Test {
 	}
 
 	@org.junit.Test
-	public void testAccount() {
-		Example1Checker checker = new Example1Checker();
-
+	public void test1() {
 		for (int i=0;i<accountCSV.size();i++) {		
 			String[] row = accountCSV.get(i);
-
-			Company company = new Company();
-			ProfitCenter profitCenter = new ProfitCenter();
-			CRComponent crComponent = new CRComponent();
-			boolean external = true; // default is true for testing purpose
-			DataScenarioType scenarioType = new DataScenarioType("");
-			String partnerCode = "123"; // default is "123" for testing purpose
-			String currencyCode = "123"; // default is "123" for testing purpose
 
 			Boolean isPartnerAllowed = Boolean.valueOf(row[3]);
 			Account account = new Account(row[0],row[1],row[2],isPartnerAllowed);
@@ -81,6 +78,8 @@ public class Test {
 			if (row[0].startsWith("NDS_AF")) {
 				System.out.println(i + ". " + row[0] + " " + row[1] + " " + row[2] + " " + row[3]);
 				assertEquals(isPartnerAllowed,checker.isValid(company, profitCenter, crComponent, isPartnerAllowed, scenarioType, account, currencyCode, currencyCode));
+				System.out.println("Testing complete for line " + i);
+				System.out.println();
 			}
 		}
 	}

@@ -11,8 +11,8 @@ public class Account implements IAccount {
 	
 	public Account(String code, String accountClass, String accountType, boolean isPartnerAllowed) {
 		this.code = code;
-		this.accountClass = new AccountClass (accountClass);
-		this.accountType = new AccountType (accountType);
+		this.accountClass = new AccountClass(accountClass);
+		this.accountType = new AccountType(accountType);
 		this.isPartnerAllowed = isPartnerAllowed;
 	}
 
