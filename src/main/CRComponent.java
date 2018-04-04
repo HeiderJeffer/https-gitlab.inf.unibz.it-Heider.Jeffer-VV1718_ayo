@@ -8,10 +8,6 @@ public class CRComponent implements ICRComponent {
 	boolean isNotAllocated;
 	boolean isVKAllowed;
 	boolean isSEANAllowed;
-
-	public CRComponent() {
-
-	}
 	
 	public CRComponent(String name, boolean isNotAllocated, boolean isVKAllowed, boolean isSEANAllowed) {
 		this.name = name;

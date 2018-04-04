@@ -271,7 +271,7 @@ public class Example1Checker {
 					break;
 				}
 			}
-			
+						
 			// C/R Component
 			if(!crComponent.isNotAllocated()) {
 				return false;

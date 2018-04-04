@@ -25,10 +25,11 @@ public class Test {
 	Example1Checker checker = new Example1Checker();
 
 	Company company = new Company(); // dummy object
-	ProfitCenter profitCenter = new ProfitCenter(); // dummy object
-	CRComponent crComponent = new CRComponent(); // dummy object
+	ProfitCenter profitCenter = new ProfitCenter("Profit", true); // dummy object
+	CRComponent crComponent = new CRComponent("Component", true, false, false); // dummy object
 	boolean external = true; // dummy value
-	DataScenarioType scenarioType = new DataScenarioType(""); // dummy value
+	DataScenarioType scenarioType = new DataScenarioType("Actual"); // dummy value
+	String partnerCode = "partner"; // dummy value
 	String currencyCode = "$"; // dummy value
 
 	@Before
@@ -52,7 +53,9 @@ public class Test {
 		for(int i=0;i<accountCombinationsCSV.size();i++) {
 			String[] row = accountCombinationsCSV.get(i);
 
-			if(row[0].contains("-")) continue;
+			if(row[0].contains("-")) {
+				
+			}
 			else {
 				for(int j=0;j<accountCSV.size();j++) {
 					String[] row2 = accountCSV.get(j);
@@ -62,7 +65,7 @@ public class Test {
 						Account account = new Account(row2[0],row2[1],row2[2],isPartnerAllowed);
 
 						System.out.println((j+1) + ". " + row2[0] + " " + row2[1] + " " + row2[2] + " " + row2[3]);
-						assertEquals(isPartnerAllowed,checker.isValid(company, profitCenter, crComponent, isPartnerAllowed, scenarioType, account, currencyCode, currencyCode));
+						assertEquals(isPartnerAllowed,checker.isValid(company, profitCenter, crComponent, isPartnerAllowed, scenarioType, account, partnerCode, currencyCode));
 						System.out.println("Testing complete for line " + (j+1));
 						System.out.println();
 					}

@@ -7,10 +7,6 @@ public class ProfitCenter implements IProfitCenter {
 	String name;
 	boolean isNotAllocated;
 	
-	public ProfitCenter() {
-
-	}
-	
 	public ProfitCenter(String name, boolean isNotAllocated) {
 		this.name = name;
 		this.isNotAllocated = isNotAllocated;
