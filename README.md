@@ -1,6 +1,7 @@
 ## Check prefix NDS_AF
-* Sample output
+Sample output
 
+```
 Load Account.csv file
 23. NDS_AF52100100 AllocationFormula  FALSE
 Testing complete for line 23
@@ -294,3 +295,4 @@ Testing complete for line 118
 Testing complete for line 119
 
 Finish testing
+```
