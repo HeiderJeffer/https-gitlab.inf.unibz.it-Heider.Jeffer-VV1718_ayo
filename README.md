@@ -1,3 +1,25 @@
+# Software Reliability and Testing - 1st Assignment - Reduce the number of combinations
+
+## Test class
+src/com/wuerth/phoenix/cis/university/example1/test/Test.java
+
+## Dependency
+JUnit4.
+
+## Total combinations and reduction strategy
+Total combinations is 54.
+
+Steps to reduce the combinations were:
+* Reduced redundant rows from Account.csv to 21 rows, omitted the getCode column since it will not be used at Example1Checker.java
+* Reduced redundant rows from CRComponent.csv to 3 rows, omitted the getName column since it will not be used at Example1Checker.java
+* Reduced redundant rows from ProfitCenter.csv to 2 rows, omitted the getName column since it will not be used at Example1Checker.java
+* Merge Account.csv , CRComponent.csv , and ProfitCenter.csv (21 x 3 x 2 = 126 rows)
+* Reduced 126 rows to 84 combinations, based on Example1.docx and Example1Combinations.docx
+
+![Alt text](data/result.png)
+
+### Combinations
+```
 pcName,isNotAllocated,crName,isNotAllocated,isVKAllowed,isSEANAllowed,external,dataScenarioType,accountCode,accountClass,accountType,isPartnerAllowed,partnerCode,currencyCode
 PCArt,FALSE,ADMINISTRATIONFINANCIAL,FALSE,FALSE,FALSE,TRUE,Plan,0,AllocationFormula,,FALSE,,
 PC0,TRUE,ADMINISTRATIONFINANCIAL,FALSE,FALSE,FALSE,TRUE,Plan,1,AllocationFormula,,FALSE,,
@@ -83,3 +105,7 @@ PC0,TRUE,DIRECTSALES08,FALSE,TRUE,TRUE,FALSE,Actual,80,SalesReporting,SpecialAna
 PCArt,FALSE,AREANOALLOCATION,TRUE,TRUE,TRUE,FALSE,Actual,81,SalesReporting,SpecialAnalysesServiceDegree,FALSE,,
 PC0,TRUE,AREANOALLOCATION,TRUE,TRUE,TRUE,FALSE,Actual,82,SalesReporting,SpecialAnalysesServiceDegree,FALSE,,
 PC0,TRUE,AREANOALLOCATION,TRUE,TRUE,TRUE,TRUE,Actual,83,SalesReporting,VK,FALSE,,
+```
+
+## New CSV file
+data\combinations.csv

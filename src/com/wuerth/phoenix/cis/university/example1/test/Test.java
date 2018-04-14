@@ -53,7 +53,7 @@ public class Test {
 		Scanner scanner = new Scanner(new File(path));
 		scanner.nextLine(); // skip the header
 
-		Object[][] combinations = new Object[54][8];
+		Object[][] combinations = new Object[84][8];
 
 		int counter = 0;
 		while(scanner.hasNext()){
