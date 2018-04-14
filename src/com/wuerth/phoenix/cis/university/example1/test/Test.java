@@ -28,8 +28,10 @@ public class Test {
 	private IAccount account;
 	private String partnerCode;
 	private String currencyCode;
+	
+	private boolean oracle;
 
-	public Test(ICompany company, IProfitCenter profitCenter, ICRComponent crComponent, boolean external, DataScenarioType scenarioType, IAccount account, String partnerCode, String currencyCode) {
+	public Test(ICompany company, IProfitCenter profitCenter, ICRComponent crComponent, boolean external, DataScenarioType scenarioType, IAccount account, String partnerCode, String currencyCode, boolean oracle) {
 		this.company = company;
 		this.profitCenter = profitCenter;
 		this.crComponent = crComponent;
@@ -38,6 +40,8 @@ public class Test {
 		this.account = account;
 		this.partnerCode = partnerCode;
 		this.currencyCode = currencyCode;
+		
+		this.oracle = oracle;
 	}
 
 	@Parameterized.Parameters
@@ -49,11 +53,11 @@ public class Test {
 		Scanner scanner = new Scanner(new File(path));
 		scanner.nextLine(); // skip the header
 
-		Object[][] combinations = new Object[126][8];
+		Object[][] combinations = new Object[54][8];
 
 		int counter = 0;
 		while(scanner.hasNext()){
-			String temp = scanner.next();
+			String temp = scanner.next(); System.out.println(temp);
 			String[] line = temp.split(",");
 
 			ICompany company = new Company();
@@ -84,7 +88,7 @@ public class Test {
 			String partnerCode = line.length>12 ? line[12] : null;
 			String currencyCode = line.length>13 ? line[13] : null;
 
-			combinations[counter++] = new Object[]{company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode};
+			combinations[counter++] = new Object[]{company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode, true};
 		}
 		scanner.close();
 
@@ -94,21 +98,7 @@ public class Test {
 	@org.junit.Test
 	public void test() {
 		Example1Checker checker = new Example1Checker();
-
-		/*
-		// Debug the parameter assignment
-		System.out.println(company.toString());
-		System.out.println(profitCenter.getName() + " " + profitCenter.isNotAllocated());
-		System.out.println(crComponent.getName() + " " + crComponent.isNotAllocated() + " " + crComponent.isVKAllowed() + " " + crComponent.isSEANAllowed());
-		System.out.println(external);
-		System.out.println(scenarioType.toString());
-		System.out.println(account.getCode() + " " + account.getAccountClass().toString() + " " + account.getAccountType().toString() + " " + account.isPartnerAllowed());
-		System.out.println(partnerCode);
-		System.out.println(currencyCode);
-		System.out.println();
-		*/
-
-		boolean oracle = true;
+		
 		boolean result = checker.isValid(company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode);
 
 		assertEquals(oracle, result);
