@@ -1,6 +1,6 @@
-package adapters;
+package com.wuerth.phoenix.cis.university.example1.adapters;
 
-import types.DataScenarioType;
+import com.wuerth.phoenix.cis.university.example1.types.DataScenarioType;
 
 public interface IData {
 
@@ -12,7 +12,7 @@ public interface IData {
 	public DataScenarioType getScenario();
 	
 	public IAccount getAccount();
-	public String getPartnerCode();
+	public String getParternCode();
 	public String getCurrencyCode();
 	
 	public int getYear();

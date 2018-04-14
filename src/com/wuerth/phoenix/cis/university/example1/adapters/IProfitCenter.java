@@ -1,4 +1,4 @@
-package adapters;
+package com.wuerth.phoenix.cis.university.example1.adapters;
 
 public interface IProfitCenter {
 
