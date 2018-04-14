@@ -7,7 +7,7 @@ src/com/wuerth/phoenix/cis/university/example1/test/Test.java
 JUnit4.
 
 ## Total combinations and reduction strategy
-Total combinations is 54.
+Total combinations is 84.
 
 Steps to reduce the combinations were:
 * Reduced redundant rows from Account.csv to 21 rows, omitted the getCode column since it will not be used at Example1Checker.java
