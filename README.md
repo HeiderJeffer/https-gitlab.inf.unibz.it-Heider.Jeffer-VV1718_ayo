@@ -16,7 +16,7 @@ Steps to reduce the combinations were:
 * Merge Account.csv , CRComponent.csv , and ProfitCenter.csv (21 x 3 x 2 = 126 rows)
 * Reduced 126 rows to 84 combinations, based on Example1.docx and Example1Combinations.docx
 
-![Alt text](data/result.png)
+![Alt text](data/result.PNG)
 
 ### Combinations
 ```
