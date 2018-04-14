@@ -81,8 +81,8 @@ public class Test {
 					line[9],
 					line[10],
 					Boolean.parseBoolean(line[11]));
-			String partnerCode = line[12];
-			String currencyCode = line[13];
+			String partnerCode = line.length>12 ? line[12] : null;
+			String currencyCode = line.length>13 ? line[13] : null;
 
 			combinations[counter++] = new Object[]{company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode};
 		}
@@ -108,7 +108,7 @@ public class Test {
 		System.out.println();
 		*/
 
-		boolean oracle = false;
+		boolean oracle = true;
 		boolean result = checker.isValid(company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode);
 
 		assertEquals(oracle, result);

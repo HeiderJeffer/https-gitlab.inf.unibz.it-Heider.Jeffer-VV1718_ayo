@@ -1,2 +1,2 @@
 pcName,isNotAllocated,crName,isNotAllocated,isVKAllowed,isSEANAllowed,external,dataScenarioType,accountCode,accountClass,accountType,isPartnerAllowed,partnerCode,currencyCode
-PC,TRUE,CR,TRUE,TRUE,TRUE,TRUE,Actual,Code,SalesReporting,BranchOffice,TRUE,Code,Euro
+PC,TRUE,CR,TRUE,TRUE,TRUE,TRUE,Actual,Code,SalesReporting,BranchOffice,TRUE,,
