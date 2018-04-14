@@ -1,4 +1,2 @@
-company,profitCenter,crComponent,external,scenarioType,account,partnerCode,currencyCode
-null,null,null,false,null,null,null,null
-null,null,null,false,null,null,null,null
-null,null,null,false,null,null,null,null
+pcName,isNotAllocated,crName,isNotAllocated,isVKAllowed,isSEANAllowed,external,dataScenarioType,accountCode,accountClass,accountType,isPartnerAllowed,partnerCode,currencyCode
+PC,TRUE,CR,TRUE,TRUE,TRUE,TRUE,Actual,Code,SalesReporting,BranchOffice,TRUE,Code,Euro

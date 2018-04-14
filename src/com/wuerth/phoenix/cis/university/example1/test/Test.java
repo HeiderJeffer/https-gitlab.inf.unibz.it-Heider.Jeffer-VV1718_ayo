@@ -48,22 +48,65 @@ public class Test {
 
 		Scanner scanner = new Scanner(new File(path));
 		scanner.nextLine(); // skip the header
-		
-		Object[][] combinations = new Object[3][8];
-		
+
+		Object[][] combinations = new Object[1][8];
+
 		int counter = 0;
 		while(scanner.hasNext()){
-			String[] line = scanner.next().split(",");
-			combinations[counter++] = new Object[]{null,null,null,Boolean.parseBoolean(line[3]),null,null,null,null};
+			String temp = scanner.next();
+			String[] line = temp.split(",");
+
+			ICompany company = new Company();
+			IProfitCenter profitCenter = new ProfitCenter(
+					line[0],
+					Boolean.parseBoolean(line[1]));
+
+			ICRComponent crComponent = new CRComponent(
+					line[2],
+					Boolean.parseBoolean(line[3]),
+					Boolean.parseBoolean(line[4]),
+					Boolean.parseBoolean(line[5]));
+
+			boolean external = Boolean.parseBoolean(line[6]);
+
+			DataScenarioType scenarioType = null;
+			DataScenarioType[] dt = DataScenarioType.values();
+			for(DataScenarioType d: dt) {
+				if(d.toString().equals(line[7]))
+					scenarioType = d;
+			}
+
+			IAccount account = new Account(
+					line[8],
+					line[9],
+					line[10],
+					Boolean.parseBoolean(line[11]));
+			String partnerCode = line[12];
+			String currencyCode = line[13];
+
+			combinations[counter++] = new Object[]{company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode};
 		}
 		scanner.close();
-		  
+
 		return Arrays.asList(combinations);
 	}
 
 	@org.junit.Test
 	public void test() {
 		Example1Checker checker = new Example1Checker();
+
+		/*
+		// Debug the parameter assignment
+		System.out.println(company.toString());
+		System.out.println(profitCenter.getName() + " " + profitCenter.isNotAllocated());
+		System.out.println(crComponent.getName() + " " + crComponent.isNotAllocated() + " " + crComponent.isVKAllowed() + " " + crComponent.isSEANAllowed());
+		System.out.println(external);
+		System.out.println(scenarioType.toString());
+		System.out.println(account.getCode() + " " + account.getAccountClass().toString() + " " + account.getAccountType().toString() + " " + account.isPartnerAllowed());
+		System.out.println(partnerCode);
+		System.out.println(currencyCode);
+		System.out.println();
+		*/
 
 		boolean oracle = false;
 		boolean result = checker.isValid(company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode);
