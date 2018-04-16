@@ -1,4 +1,5 @@
-# Software Reliability and Testing - 1st Assignment - Reduce the number of combinations
+# Software Reliability and Testing
+# 1st Assignment - Reduce the number of combinations
 
 ## Test class
 src/com/wuerth/phoenix/cis/university/example1/test/Test.java
@@ -10,9 +11,9 @@ JUnit4.
 Total combinations is 84.
 
 Steps to reduce the combinations were:
-* Reduced redundant rows from Account.csv to 21 rows, omitted the getCode column since it will not be used at Example1Checker.java
-* Reduced redundant rows from CRComponent.csv to 3 rows, omitted the getName column since it will not be used at Example1Checker.java
-* Reduced redundant rows from ProfitCenter.csv to 2 rows, omitted the getName column since it will not be used at Example1Checker.java
+* Reduced redundant rows from Account.csv to 21 rows, omitted the getCode column since it was not be used at Example1Checker.java
+* Reduced redundant rows from CRComponent.csv to 3 rows, omitted the getName column since it was not be used at Example1Checker.java
+* Reduced redundant rows from ProfitCenter.csv to 2 rows, omitted the getName column since it was not be used at Example1Checker.java
 * Merge Account.csv , CRComponent.csv , and ProfitCenter.csv (21 x 3 x 2 = 126 rows)
 * Reduced 126 rows to 84 combinations, based on Example1.docx and Example1Combinations.docx
 
