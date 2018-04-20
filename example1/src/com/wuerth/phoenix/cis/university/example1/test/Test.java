@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
@@ -50,15 +51,12 @@ public class Test {
 		String rootProjectPath = System.getProperty("user.dir");
 		String path = rootProjectPath + "\\data\\combinations.csv";
 
-		Scanner scanner = new Scanner(new File(path));
-		scanner.nextLine(); // skip the header
-
+		ArrayList<String[]> list = CSVReader.getAll(path, ",", 1);
 		Object[][] combinations = new Object[84][8];
 
 		int counter = 0;
-		while(scanner.hasNext()){
-			String temp = scanner.next(); System.out.println(temp);
-			String[] line = temp.split(",");
+		for(int i=0;i<list.size();i++) {
+			String[] line = list.get(i);
 
 			ICompany company = new Company();
 			IProfitCenter profitCenter = new ProfitCenter(
@@ -90,7 +88,6 @@ public class Test {
 
 			combinations[counter++] = new Object[]{company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode, true};
 		}
-		scanner.close();
 
 		return Arrays.asList(combinations);
 	}
