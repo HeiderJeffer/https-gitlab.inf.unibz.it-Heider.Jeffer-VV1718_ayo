@@ -30,9 +30,7 @@ public class Test {
 	private String partnerCode;
 	private String currencyCode;
 	
-	private boolean oracle;
-
-	public Test(ICompany company, IProfitCenter profitCenter, ICRComponent crComponent, boolean external, DataScenarioType scenarioType, IAccount account, String partnerCode, String currencyCode, boolean oracle) {
+	public Test(ICompany company, IProfitCenter profitCenter, ICRComponent crComponent, boolean external, DataScenarioType scenarioType, IAccount account, String partnerCode, String currencyCode) {
 		this.company = company;
 		this.profitCenter = profitCenter;
 		this.crComponent = crComponent;
@@ -41,8 +39,6 @@ public class Test {
 		this.account = account;
 		this.partnerCode = partnerCode;
 		this.currencyCode = currencyCode;
-		
-		this.oracle = oracle;
 	}
 
 	@Parameterized.Parameters
@@ -52,41 +48,43 @@ public class Test {
 		String path = rootProjectPath + "\\data\\combinations.csv";
 
 		ArrayList<String[]> list = CSVReader.getAll(path, ",", 1);
-		Object[][] combinations = new Object[84][8];
+		Object[][] combinations = new Object[list.size()][8];
 
 		int counter = 0;
 		for(int i=0;i<list.size();i++) {
-			String[] line = list.get(i);
+			String[] row = list.get(i);
 
-			ICompany company = new Company();
+			IAccount account = new Account(
+					row[0],
+					row[1],
+					row[2],
+					Boolean.parseBoolean(row[3]));
+
 			IProfitCenter profitCenter = new ProfitCenter(
-					line[0],
-					Boolean.parseBoolean(line[1]));
+					row[4],
+					Boolean.parseBoolean(row[5]));
 
 			ICRComponent crComponent = new CRComponent(
-					line[2],
-					Boolean.parseBoolean(line[3]),
-					Boolean.parseBoolean(line[4]),
-					Boolean.parseBoolean(line[5]));
+					row[6],
+					Boolean.parseBoolean(row[7]),
+					Boolean.parseBoolean(row[8]),
+					Boolean.parseBoolean(row[9]));
 
-			boolean external = Boolean.parseBoolean(line[6]);
+			boolean external = Boolean.parseBoolean(row[10]);
 
 			DataScenarioType scenarioType = null;
 			DataScenarioType[] dt = DataScenarioType.values();
 			for(DataScenarioType d: dt) {
-				if(d.toString().equals(line[7]))
+				if(d.toString().equals(row[11]))
 					scenarioType = d;
-			}
+			}			
 
-			IAccount account = new Account(
-					line[8],
-					line[9],
-					line[10],
-					Boolean.parseBoolean(line[11]));
-			String partnerCode = line.length>12 ? line[12] : null;
-			String currencyCode = line.length>13 ? line[13] : null;
+			ICompany company = new Company();
 
-			combinations[counter++] = new Object[]{company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode, true};
+			String partnerCode = row[12].equals("null") ? null : row[12];
+			String currencyCode = row[13].equals("null") ? null : row[13];
+
+			combinations[counter++] = new Object[]{company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode};
 		}
 
 		return Arrays.asList(combinations);
@@ -98,6 +96,6 @@ public class Test {
 		
 		boolean result = checker.isValid(company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode);
 
-		assertEquals(oracle, result);
+		assertTrue(result);
 	}
 }
