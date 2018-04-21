@@ -2,12 +2,9 @@ package com.wuerth.phoenix.cis.university.example1.test;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Scanner;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -42,10 +39,9 @@ public class Test {
 	}
 
 	@Parameterized.Parameters
-	public static Collection combinations() throws IOException {
-		// read combinations.csv and assign to combinations	
+	public static Collection combinations() {
 		String rootProjectPath = System.getProperty("user.dir");
-		String path = rootProjectPath + "\\data\\combinations.csv";
+		String path = rootProjectPath + "\\data\\Combinations.csv";
 
 		ArrayList<String[]> list = CSVReader.getAll(path, ",", 1);
 		Object[][] combinations = new Object[list.size()][8];
@@ -54,22 +50,9 @@ public class Test {
 		for(int i=0;i<list.size();i++) {
 			String[] row = list.get(i);
 
-			IAccount account = new Account(
-					row[0],
-					row[1],
-					row[2],
-					Boolean.parseBoolean(row[3]));
-
-			IProfitCenter profitCenter = new ProfitCenter(
-					row[4],
-					Boolean.parseBoolean(row[5]));
-
-			ICRComponent crComponent = new CRComponent(
-					row[6],
-					Boolean.parseBoolean(row[7]),
-					Boolean.parseBoolean(row[8]),
-					Boolean.parseBoolean(row[9]));
-
+			IAccount account = new Account(row[0], row[1], row[2], Boolean.parseBoolean(row[3]));
+			IProfitCenter profitCenter = new ProfitCenter(row[4], Boolean.parseBoolean(row[5]));
+			ICRComponent crComponent = new CRComponent(row[6], Boolean.parseBoolean(row[7]), Boolean.parseBoolean(row[8]), Boolean.parseBoolean(row[9]));
 			boolean external = Boolean.parseBoolean(row[10]);
 
 			DataScenarioType scenarioType = null;
@@ -78,11 +61,11 @@ public class Test {
 				if(d.toString().equals(row[11]))
 					scenarioType = d;
 			}			
+			
+			String partnerCode = row.length>12 ? row[12] : null;
+			String currencyCode = row.length>13 ? row[13] : null;			
 
 			ICompany company = new Company();
-
-			String partnerCode = row[12].equals("null") ? null : row[12];
-			String currencyCode = row[13].equals("null") ? null : row[13];
 
 			combinations[counter++] = new Object[]{company, profitCenter, crComponent, external, scenarioType, account, partnerCode, currencyCode};
 		}

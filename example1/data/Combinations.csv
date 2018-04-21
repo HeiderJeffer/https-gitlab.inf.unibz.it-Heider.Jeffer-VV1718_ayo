@@ -1,45 +1,3 @@
-# Software Reliability and Testing 2017/2018
-## Team Member
-* Buse Eryilmaz
-* Heider Jeffer
-* Opaniyi Ayokunmi Tolulope
-* Triando Damiri Burlian
-
-# 1st Assignment - Reduce the number of combinations
-
-## Test class
-`src/com/wuerth/phoenix/cis/university/example1/test/Test.java`
-
-## Dependency
-JUnit4 and JRE System Library.
-
-## Total combinations and reduction strategy
-Total combinations was 56, which was generated automatically by CombinationGenerator.Java
-`src/com/wuerth/phoenix/cis/university/example1/test/CombinationGenerator.Java`
-
-Steps of `CombinationGenerator.jav`a to reduce the combinations were:
-* Read `Account.csv`
-** skipped 1st row (table header)
-** skipped 1st column because `getCode()` method from `Account.jav`a is not used as an valid criteria at `Example1Checker.java`
-** removed duplicates from 1819 rows to 23 rows
-
-* Read `CRComponent.csv`
-** skipped 1st row (table header)
-** skipped 1st column because `getName()` method from `CRComponent.java` is not used as an valid criteria at `Example1Checker.java`
-** removed duplicates from 21 rows to 3 rows
-
-* Read `ProfitCenter.csv`
-** skipped 1st row (table header)
-** skipped 1st column because `getName()` method from `ProfitCenter.java` is not used as an valid criteria at `Example1Checker.java`
-** removed duplicates from 78 rows to 2 rows
-
-* Combined Account, CRComponent, and ProfitCenter from 23 x 3 x 2 to 138 rows
-* Filtered valid combinations by passing object to `isValid()` method and wrote 56 combinations to `Combination.csv`
-* Implemented unit test by using parameterized test and read reduced combinations at `Combination.csv`
-![Alt text](data/result.PNG)
-
-### Combinations
-```
 accountCode,accountClass,accountType,isPartnerAllowed,pcName,isNotAllocated,crName,isNotAllocated,isVKAllowed,isSEANAllowed,external,dataScenarioType,partnerCode,currencyCode
 Code,Logistics,,false,ProfitCenter,true,CRComponent,true,true,true,true,Actual,,
 Code,AllocationFormula,,false,ProfitCenter,true,CRComponent,false,false,false,true,Actual,,
@@ -97,7 +55,3 @@ Code,PLStatement,PrognosisNumOfAdmMPlus1,false,ProfitCenter,true,CRComponent,tru
 Code,PLStatement,PrognosisNumOfAdmMPlus2,false,ProfitCenter,true,CRComponent,true,true,true,true,Actual,,
 Code,PLStatement,PrognosisOperatingResult,false,ProfitCenter,true,CRComponent,true,true,true,true,Actual,,
 Code,PLStatement,PrognosisSales,false,ProfitCenter,true,CRComponent,true,true,true,true,Actual,,
-```
-
-## New CSV file
-data\Combinations.csv
