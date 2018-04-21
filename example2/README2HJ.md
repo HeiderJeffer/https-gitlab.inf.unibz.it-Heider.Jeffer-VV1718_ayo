@@ -1,0 +1,9 @@
+// Understand get new combinationItem 
+// SampleTestEngineData.java 
+// getNewCombinationItem understanding ...
+// understanding how to create the setting ...
+// run methodgenrate it is output of meanstream you can see what is output what is the scinario 
+// Prof. barbara could not see any file errors ...
+//Ex2 EngineTest should be our test in this class there is testExample ignore it
+// Three thing to modified ...1 2 3 
+//
