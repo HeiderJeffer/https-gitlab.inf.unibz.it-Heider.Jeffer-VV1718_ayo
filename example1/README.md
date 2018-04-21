@@ -14,24 +14,24 @@
 JUnit4 and JRE System Library.
 
 ## Total combinations and reduction strategy
-Total combinations was 56, which was generated automatically by CombinationGenerator.Java
+Total combinations was 56, which was generated automatically by `CombinationGenerator.Java`
 `src/com/wuerth/phoenix/cis/university/example1/test/CombinationGenerator.Java`
 
-Steps of `CombinationGenerator.jav`a to reduce the combinations were:
+Steps of `CombinationGenerator.java` to reduce the combinations were:
 * Read `Account.csv`
-** skipped 1st row (table header)
-** skipped 1st column because `getCode()` method from `Account.jav`a is not used as an valid criteria at `Example1Checker.java`
-** removed duplicates from 1819 rows to 23 rows
+    * skipped 1st row (table header)
+    * skipped 1st column because `getCode()` method from `Account.java` is not used as an valid criteria at `Example1Checker.java`
+    * removed duplicates from 1819 rows to 23 rows
 
 * Read `CRComponent.csv`
-** skipped 1st row (table header)
-** skipped 1st column because `getName()` method from `CRComponent.java` is not used as an valid criteria at `Example1Checker.java`
-** removed duplicates from 21 rows to 3 rows
+    * skipped 1st row (table header)
+    * skipped 1st column because `getName()` method from `CRComponent.java` is not used as an valid criteria at `Example1Checker.java`
+    * removed duplicates from 21 rows to 3 rows
 
 * Read `ProfitCenter.csv`
-** skipped 1st row (table header)
-** skipped 1st column because `getName()` method from `ProfitCenter.java` is not used as an valid criteria at `Example1Checker.java`
-** removed duplicates from 78 rows to 2 rows
+    * skipped 1st row (table header)
+    * skipped 1st column because `getName()` method from `ProfitCenter.java` is not used as an valid criteria at `Example1Checker.java`
+    * removed duplicates from 78 rows to 2 rows
 
 * Combined Account, CRComponent, and ProfitCenter from 23 x 3 x 2 to 138 rows
 * Filtered valid combinations by passing object to `isValid()` method and wrote 56 combinations to `Combination.csv`
