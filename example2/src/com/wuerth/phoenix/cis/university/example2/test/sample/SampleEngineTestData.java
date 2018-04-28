@@ -148,7 +148,7 @@ public abstract class SampleEngineTestData implements IEngineTestData {
 		return true;
 	}
 
-	private ArrayList<Company> createCompanyList() {
+	public ArrayList<Company> createCompanyList() {
 		
 		ArrayList<Company> companyList = new ArrayList<>();
 		
@@ -812,10 +812,10 @@ public abstract class SampleEngineTestData implements IEngineTestData {
 	}
 	
 	
-	private boolean[][] createCombinations(int size) {
-		int count = Double.valueOf(Math.pow(2,size)).intValue();
-		boolean[][] map = new boolean[count][size];
-		for(int columnIndex=0; columnIndex<size; columnIndex++) {
+	public  Combination createCombinations(com.sun.scenario.Settings settings) {
+		int count = Double.valueOf(Math.pow(2,settings)).intValue();
+		boolean[][] map = new boolean[count][settings];
+		for(int columnIndex=0; columnIndex<settings; columnIndex++) {
 			int module = Double.valueOf(Math.pow(2,columnIndex)).intValue();
 			boolean value = false;
 			for(int index=0; index<count; index++) {
